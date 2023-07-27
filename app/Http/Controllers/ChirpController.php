@@ -46,7 +46,7 @@ class ChirpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Chrip $chrip)
+    public function show(Chirp $chirp)
     {
         //
     }
@@ -82,8 +82,12 @@ class ChirpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chrip $chrip)
+    public function destroy(Chirp $chirp): RedirectResponse
     {
-        //
+        $this->authorize('delete', $chirp);
+
+        $chirp->delete();
+
+        return redirect(route('chirps.index'));
     }
 }
